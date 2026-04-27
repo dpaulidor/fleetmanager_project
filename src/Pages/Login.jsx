@@ -1,42 +1,43 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css"; // 🔥 IMPORTANT
+import "./Login.css";
 
-function Login() {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      setError("Remplis tous les champs");
-      return;
-    }
+    // Simulation d'un utilisateur
+    const fakeUser = {
+      email: "admin@gmail.com",
+      password: "1234",
+    };
 
-    if (email === "admin@gmail.com" && password === "1234") {
+    if (email === fakeUser.email && password === fakeUser.password) {
+      // Sauvegarde utilisateur
       localStorage.setItem("user", JSON.stringify({ email }));
+
+      // Redirection
       navigate("/dashboard");
     } else {
-      setError("Identifiants incorrects");
+      alert("Email ou mot de passe incorrect");
     }
   };
 
   return (
     <div className="login-container">
-      <form onSubmit={handleLogin} className="login-card">
+      <form className="login-form" onSubmit={handleLogin}>
         <h2>Connexion</h2>
-
-        {error && <p className="error">{error}</p>}
 
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
 
         <input
@@ -44,12 +45,13 @@ function Login() {
           placeholder="Mot de passe"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
 
         <button type="submit">Se connecter</button>
       </form>
     </div>
   );
-}
+};
 
 export default Login;
