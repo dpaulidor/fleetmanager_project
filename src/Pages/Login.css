@@ -34,3 +34,63 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.login-form button:hover {
+  background: #1a6fd6;
+}
+
+.error-message {
+  background: #fee;
+  color: #c00;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.success-message {
+  background: #efe;
+  color: #060;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.register-link {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+
+.register-link a {
+  color: #2f80ed;
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+.password-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-container input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  background-color: transparent !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 6px;
+}
