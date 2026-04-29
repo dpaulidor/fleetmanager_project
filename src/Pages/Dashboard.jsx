@@ -175,8 +175,8 @@ const Dashboard = () => {
   }, []);
   const handleLogout = () => {
     if (window.confirm("Voulez-vous vraiment vous déconnecter ?")) {
-    localStorage.removeItem("user");
-    navigate("/");
+      localStorage.removeItem("user");
+      navigate("/");
     }
   };
   const [vehicles, setVehicles] = useState(() => {
@@ -199,6 +199,18 @@ const Dashboard = () => {
     kilometrage: "",
     conducteur: "",
   });
+
+  // Statistiques dynamiques
+  const stats = {
+    total: vehicles.length,
+    disponibles: vehicles.filter((v) => v.disponibilite === "Disponible")
+      .length,
+    nonDisponibles: vehicles.filter((v) => v.disponibilite === "Non dispo")
+      .length,
+    bons: vehicles.filter((v) => v.etat === "Bon").length,
+    enPanne: vehicles.filter((v) => v.etat === "En panne").length,
+    entretien: vehicles.filter((v) => v.etat === "Entretien").length,
+  };
 
   const addHistoryLog = (message) => {
     const newLog = {
@@ -355,36 +367,36 @@ const Dashboard = () => {
         <div className="stat-card blue">
           <div className="stat-icon">🚗</div>
           <div>
-            <div className="stat-value">{fixedStats.actifs}</div>
-            <div className="stat-label">Véhicules actifs</div>
+            <div className="stat-value">{stats.total}</div>
+            <div className="stat-label">Total véhicules</div>
           </div>
         </div>
         <div className="stat-card green">
-          <div className="stat-icon">🏁</div>
+          <div className="stat-icon">✅</div>
           <div>
-            <div className="stat-value">{fixedStats.enUtilisation}</div>
-            <div className="stat-label">En utilisation</div>
-          </div>
-        </div>
-        <div className="stat-card purple">
-          <div className="stat-icon">📦</div>
-          <div>
-            <div className="stat-value">{fixedStats.materiels}</div>
-            <div className="stat-label">Matériels</div>
+            <div className="stat-value">{stats.disponibles}</div>
+            <div className="stat-label">Disponibles</div>
           </div>
         </div>
         <div className="stat-card red">
-          <div className="stat-icon">⚠️</div>
+          <div className="stat-icon">❌</div>
           <div>
-            <div className="stat-value">{fixedStats.horsService}</div>
-            <div className="stat-label">Hors service</div>
+            <div className="stat-value">{stats.nonDisponibles}</div>
+            <div className="stat-label">Non disponibles</div>
+          </div>
+        </div>
+        <div className="stat-card purple">
+          <div className="stat-icon">🔧</div>
+          <div>
+            <div className="stat-value">{stats.entretien}</div>
+            <div className="stat-label">En entretien</div>
           </div>
         </div>
         <div className="stat-card orange">
-          <div className="stat-icon">🔧</div>
+          <div className="stat-icon">⚠️</div>
           <div>
-            <div className="stat-value">{fixedStats.enMaintenance}</div>
-            <div className="stat-label">En maintenance</div>
+            <div className="stat-value">{stats.enPanne}</div>
+            <div className="stat-label">En panne</div>
           </div>
         </div>
       </div>
